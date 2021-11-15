@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "10AB97B4-6520-4121-B0F3-71BD541F47C5",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "AnimationsEnabledKey",
+        "value" : "NO"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CoffeeFinder.xcodeproj",
+      "identifier" : "8BBF2D06272D3C7900F6BDA6",
+      "name" : "CoffeeFinder"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:CoffeeFinder.xcodeproj",
+        "identifier" : "8BBF2D16272D3C7A00F6BDA6",
+        "name" : "CoffeeFinderTests"
+      }
+    }
+  ],
+  "version" : 1
+}
