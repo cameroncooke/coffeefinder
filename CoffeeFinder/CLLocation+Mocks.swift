@@ -1,8 +1,6 @@
 //
 //  CLLocation+Mocks.swift
-//  CoffeeFinder
-//
-//  Created by Cameron Cooke on 15/11/2021.
+//  Copyright © 2021 Cameron Cooke.
 //
 
 import Foundation
