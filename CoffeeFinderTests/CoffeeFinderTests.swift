@@ -24,8 +24,6 @@ class CoffeeFinderTests: XCTestCase {
             )
         )
 
-        XCTExpectFailure("Assertions below are passing but overall test is being failed by TCA due to an unexpected long-running Effect returned by the `.onAppear` action.")
-
         store.send(.onAppear) { state in
             state.processState = .loading
             state.location = nil
@@ -46,6 +44,8 @@ class CoffeeFinderTests: XCTestCase {
         store.receive(.venueGroupsResponse(.success(.makeMocks()))) { state in
             state.processState = .loaded(.makeMocks())
         }
+
+        store.send(.onDisappear)
     }
 
     func testOnAppearSadPathLocationClientError() {
@@ -59,8 +59,6 @@ class CoffeeFinderTests: XCTestCase {
                 mainQueue: scheduler.eraseToAnyScheduler()
             )
         )
-
-        XCTExpectFailure("Assertions below are passing but overall test is being failed by TCA due to an unexpected long-running Effect returned by the `.onAppear` action.")
 
         store.send(.onAppear) { state in
             state.processState = .loading
@@ -76,6 +74,8 @@ class CoffeeFinderTests: XCTestCase {
         store.receive(.locationClient(.didFailWithError(LocationClientMockError()))) { state in
             state.processState = .locationError
         }
+
+        store.send(.onDisappear)
     }
 
     func testOnAppearSadPathFourSquareClientError() {
@@ -89,8 +89,6 @@ class CoffeeFinderTests: XCTestCase {
                 mainQueue: scheduler.eraseToAnyScheduler()
             )
         )
-
-        XCTExpectFailure("Assertions below are passing but overall test is being failed by TCA due to an unexpected long-running Effect returned by the `.onAppear` action.")
 
         store.send(.onAppear) { state in
             state.processState = .loading
@@ -112,6 +110,8 @@ class CoffeeFinderTests: XCTestCase {
         store.receive(.venueGroupsResponse(.failure(FourSquareClient.Error.clientError))) { state in
             state.processState = .fetchError(.clientError)
         }
+
+        store.send(.onDisappear)
     }
 
     func testViewModeChanged() {
