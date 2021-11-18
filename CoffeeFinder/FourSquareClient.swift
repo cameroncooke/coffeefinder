@@ -128,7 +128,18 @@ struct FourSquareClient {
 
 extension FourSquareClient {
 
-    static func live(urlSession: URLSession = .shared)  ->  Self {
+    static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter
+    }()
+
+    static func live(
+        urlSession: URLSession = .shared,
+        clientId: String = Constants.FourSquare.clientId,
+        secretId: String = Constants.FourSquare.secretId,
+        version: String = Self.dateFormatter.string(from: Date.now)
+    )  ->  Self {
         return Self(
             searchVenues: { lat, long in
 
@@ -137,14 +148,13 @@ extension FourSquareClient {
                         .eraseToEffect()
                 }
 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyyMMdd"
+
 
                 components.queryItems = [
-                    URLQueryItem(name: "client_id", value: Constants.FourSquare.clientId),
-                    URLQueryItem(name: "client_secret", value: Constants.FourSquare.secretId),
+                    URLQueryItem(name: "client_id", value: clientId),
+                    URLQueryItem(name: "client_secret", value: secretId),
                     URLQueryItem(name: "section", value: Constants.FourSquare.section),
-                    URLQueryItem(name: "v", value: dateFormatter.string(from: Date.now)),
+                    URLQueryItem(name: "v", value: version),
                     URLQueryItem(name: "ll", value: "\(long),\(lat)")
                 ]
 

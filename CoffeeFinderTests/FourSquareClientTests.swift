@@ -28,7 +28,12 @@ class FourSquareClientTests: XCTestCase {
 
         let expectation = self.expectation(description: "Make URL Request")
 
-        let sut = FourSquareClient.live(urlSession: .mock)
+        let sut = FourSquareClient.live(
+            urlSession: .mock,
+            clientId: "CLIENT_ID",
+            secretId: "SECRET_ID",
+            version: "20211115"
+        )
 
         var actualRequestURL: URL?
         MockURLProtocol.requestHandler = { request in
@@ -50,7 +55,7 @@ class FourSquareClientTests: XCTestCase {
         let actualURL = try XCTUnwrap(actualRequestURL)
         XCTAssertNoDifference(
             actualURL.absoluteString,
-            "https://api.foursquare.com/v2/venues/explore?client_id=3011QM3L3UXPCFSLJDYVSCQQ2PISCYHCNUULJ5YVKBSTWDZ0&client_secret=5SM0A1YTI14FGWDQXHJFQ4SFXH1HCYBFSV4DE0RL0YUTYHLZ&section=coffee&v=20211115&ll=50.831806,-0.128818"
+            "https://api.foursquare.com/v2/venues/explore?client_id=CLIENT_ID&client_secret=SECRET_ID&section=coffee&v=20211115&ll=50.831806,-0.128818"
         )
 
         cancellable.cancel()
